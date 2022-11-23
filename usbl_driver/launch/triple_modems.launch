@@ -1,0 +1,20 @@
+<launch>
+
+    <!-- start the modem -->
+    <node name="modem" pkg="evologics_driver_cpp" type="node" output="screen">
+        <!-- set topics input and outputs -->
+        <rosparam command="load" file="$(find evologics_driver_cpp)/conf/s2cr1834_modem.yaml" />
+        <rosparam command="load" file="$(find evologics_driver_cpp)/conf/message_config.yaml" />
+    </node>
+
+    <node name="tiny_modem" pkg="evologics_driver_cpp" type="node" output="screen">
+        <!-- set topics input and outputs -->
+        <rosparam command="load" file="$(find evologics_driver_cpp)/conf/s2ct1834_tiny_modem.yaml" />
+        <rosparam command="load" file="$(find evologics_driver_cpp)/conf/message_config.yaml" />
+    </node>
+
+    <node name="s2ct_tiny_modem_burst_sender" pkg="evologics_driver_cpp" type="repeated_burst_msg.sh" args="tiny_modem 1 - 1"/>
+    <node name="s2cr_modem_burst_sender" pkg="evologics_driver_cpp" type="repeated_burst_msg.sh" args="modem 2 - 1"/>
+
+
+</launch>

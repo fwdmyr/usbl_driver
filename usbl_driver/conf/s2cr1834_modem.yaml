@@ -1,0 +1,18 @@
+modem_config:
+    connection_type: 'TCP/IP'  # 'SERIAL' or 'TCP/IP'
+    read_rate: 20  # Hz
+    status_rate: 0.1  # Hz
+    poll_timeout_duration: 5 # s
+    source_level: 3  #
+    watchdog_timeout: 10.0 # s
+    verbose_flag: true
+    serial_config:
+        port: '/dev/ttyUSB0'
+        baudrate: 19200
+        parity: 'N'
+        stopbits: 1
+        timeout: 0.1
+    tcp_config:
+        ip: '192.168.0.81'  # Device IP (192.168.0.212 is the USBL)
+        port: 9200           # Port number
+        type: 'lr'           # 'lr': lister-respawn, 'ls': listen-single, 'c': client

@@ -1,0 +1,27 @@
+<launch>
+    <!-- Start the module that emulates USBL measurements with ground truth from UUV simulator-->
+    <!-- <node name="evologics_usbl_position_emulation" pkg="evologics_usbl_emulator" type="set_usbl_emulated_position.py" output="screen">
+    </node>	 -->
+
+    <include file="$(find dmace_position_emulator)/launch/dmace_position_emulator.launch"> </include>
+
+    <!-- Start the melting probe modem-->
+    <node name="s2cr_modem" pkg="evologics_driver_cpp" type="node" output="screen">
+        <!-- set topics input and outputs-->
+        <rosparam command="load" file="$(find evologics_driver_cpp)/conf/dmace_modem.yaml"/>
+        <rosparam command="load" file="$(find evologics_driver_cpp)/conf/message_config.yaml" />
+    </node>
+
+    <!-- Start the AUV modem -->
+    <node name="s2ct_tiny_modem" pkg="evologics_driver_cpp" type="node" output="screen">
+        <!-- set topics input and outputs-->
+        <rosparam command="load" file="$(find evologics_driver_cpp)/conf/dmace_tiny_modem.yaml"/>
+        <rosparam command="load" file="$(find evologics_driver_cpp)/conf/message_config.yaml" />
+    </node>
+
+    <!-- Start communication using burst messages to trigger USBL position fix
+    <node name="s2cr_modem_im_sender" pkg="evologics_driver_cpp" type="repeated_im_msg.sh" args="s2cr_modem 2 - 1"/>
+    <node name="s2ct__tiny_modem_im_sender" pkg="evologics_driver_cpp" type="repeated_im_msg.sh" args="s2ct_tiny_modem 1 - 1"/>-->
+    <node name="s2cr_modem_burst_sender" pkg="evologics_driver_cpp" type="repeated_burst_msg.sh" args="s2cr_modem 2 tests2cr 1"/>
+    <node name="s2ct_tiny_modem_burst_sender" pkg="evologics_driver_cpp" type="repeated_burst_msg.sh" args="s2ct_tiny_modem 1 tests2ct 1"/>
+</launch>

@@ -1,0 +1,10 @@
+<launch>
+
+    <!-- start the modem -->
+    <node name="s2ct_tiny_modem" pkg="evologics_driver" type="node" output="screen">
+        <!-- set topics input and outputs -->
+        <rosparam command="load" file="$(find evologics_driver)/conf/s2ct1834_tiny_modem.yaml" />
+        <rosparam command="load" file="$(find evologics_driver)/conf/message_config.yaml" />
+    </node>
+
+</launch>

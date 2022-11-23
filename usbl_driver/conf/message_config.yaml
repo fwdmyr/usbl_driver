@@ -1,0 +1,27 @@
+msg_config:
+    publish_recv: true
+    publish_recvim: true
+    publish_delivered: true
+    publish_failed: true
+    publish_usbllong: true
+    publish_usblangles: true
+    publish_usblphyd: true
+    publish_usblphyp: true
+    publish_bitrate: false
+    publish_srclevel: false
+    publish_status: false
+    publish_recvfailed: false
+    publish_recvend: false
+    publish_recvsrv: false
+    publish_sendstart: false
+    publish_sendend: false
+    publish_raddr: false
+poll_config:
+    poll_batterylevel: true
+    poll_relativevelocity: true
+    poll_soundspeed: true
+    poll_multipathstructure: true
+    interval_batterylevel: 5.0
+    interval_relativevelocity: 5.0
+    interval_soundspeed: 5.0
+    interval_multipathstructure: 5.0

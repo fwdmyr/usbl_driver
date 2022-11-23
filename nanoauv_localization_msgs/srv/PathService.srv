@@ -1,0 +1,24 @@
+# vehicle_msgs/PathService.srv
+#   service type for path planner operations
+
+# common commands
+#   start:  start the navigation once a path as been loaded or requested
+#   reset:  abort the navigation disabling the pilot module and cancelling the current path
+#   hover:  pause the navigation (if any) and make the vehicle hold its position
+#   path:   request a new path (this will produce a new path id)
+string CMD_START=start
+string CMD_RESET=reset
+string CMD_HOVER=hover
+string CMD_PATH=path
+
+Header header                           # stamp the message
+string command                          # request a given fsm state
+
+Vector6[] points                        # list of waypoints (ie. control point for navigation)
+diagnostic_msgs/KeyValue[] options      # list of options (ie. additional parameters for navigation algorithms)
+
+---------
+
+bool result                             # the result of the service request (if false check info for errors)
+string state                            # the current state of the path navigation
+diagnostic_msgs/KeyValue[] info         # list of additional info about the service request
